@@ -1,59 +1,42 @@
-import userReducer, {
-  updateUserName,
-  updateMonthlyBudget,
-  updateCategoricalBudget,
-  updateActiveFilter,
-  resetAllBudget,
-} from "../redux/userSlice";
+import newTrackerReducer, {
+  addNewTracker,
+} from "../slices/newTrackerSlice";
 
-describe("user slice reducers", () => {
+describe("newTracker slice reducers", () => {
   const initialState = {
-    userName: "",
-    monthlyBudget: "",
-    categoricalBudget: {
-      food: "",
-      travel: "",
-      entertainment: "",
-      others: "",
+    trackerData: {
+      name: "",
+      monthlyBudget: "",
+      category: {
+        Food: "",
+        Travel: "",
+        Entertainment: "",
+        Other: "",
+      },
     },
-    activeFilter: "all",
   };
 
-  it("should handle updateUserName", () => {
-    const action = updateUserName("John Doe");
-    const newState = userReducer(initialState, action);
-    expect(newState.userName).toEqual("John Doe");
-  });
-
-  it("should handle updateMonthlyBudget", () => {
-    const action = updateMonthlyBudget(2000);
-    const newState = userReducer(initialState, action);
-    expect(newState.monthlyBudget).toEqual(2000);
-  });
-
-  it("should handle updateCategoricalBudget", () => {
-    const action = updateCategoricalBudget({ food: 500, travel: 300 });
-    const newState = userReducer(initialState, action);
-    expect(newState.categoricalBudget.food).toEqual(500);
-    expect(newState.categoricalBudget.travel).toEqual(300);
-  });
-
-  it("should handle updateActiveFilter", () => {
-    const action = updateActiveFilter("food");
-    const newState = userReducer(initialState, action);
-    expect(newState.activeFilter).toEqual("food");
-  });
-
-  it("should handle resetAllBudget", () => {
-    const action = resetAllBudget();
-    const newState = userReducer(initialState, action);
-    expect(newState.userName).toEqual("");
-    expect(newState.monthlyBudget).toEqual("");
-    expect(newState.categoricalBudget).toEqual({
-      food: "",
-      travel: "",
-      entertainment: ""
+  it("should handle addNewTracker", () => {
+    const action = addNewTracker({
+      name: "Monthly Budget Tracker",
+      monthlyBudget: 2000,
+      category: {
+        Food: 500,
+        Travel: 300,
+        Entertainment: 200,
+        Other: 100,
+      },
     });
-    expect(newState.activeFilter).toEqual("all");
+    const newState = newTrackerReducer(initialState, action);
+    expect(newState.trackerData).toEqual({
+      name: "Monthly Budget Tracker",
+      monthlyBudget: 2000,
+      category: {
+        Food: 500,
+        Travel: 300,
+        Entertainment: 200,
+        Other: 100,
+      },
+    });
   });
 });

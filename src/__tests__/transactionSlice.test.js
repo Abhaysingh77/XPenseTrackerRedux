@@ -1,48 +1,53 @@
-import transactionReducer, {
-  addTransactionEntry,
-  removeTransactionEntry,
-  removeAllTransactions,
-} from "../redux/transactionSlice";
+import newExpenseReducer, {
+  addNewExpense,
+  deleteExpense,
+} from "../slices/newExpenseSlice";
 
-describe("transaction slice reducers", () => {
+describe("newExpense slice reducers", () => {
   const initialState = {
-    transactionList: [],
+    expenseData: [],
   };
 
-  it("should handle addTransactionEntry", () => {
-    const action = addTransactionEntry({
+  it("should handle addNewExpense", () => {
+    const action = addNewExpense({
       id: "1",
       name: "Groceries",
       amount: 50,
       category: "food",
     });
-    const newState = transactionReducer(initialState, action);
-    expect(newState.transactionList).toHaveLength(1);
-    expect(newState.transactionList[0].name).toEqual("Groceries");
+    const newState = newExpenseReducer(initialState, action);
+    expect(newState.expenseData).toHaveLength(1);
+    expect(newState.expenseData[0]).toEqual({
+      id: "1",
+      name: "Groceries",
+      amount: 50,
+      category: "food",
+    });
   });
 
-  it("should handle removeTransactionEntry", () => {
+  it("should handle deleteExpense", () => {
     const prevState = {
-      transactionList: [
+      expenseData: [
         { id: "1", name: "Groceries", amount: 50, category: "food" },
         { id: "2", name: "Fuel", amount: 30, category: "travel" },
       ],
     };
-    const action = removeTransactionEntry("1");
-    const newState = transactionReducer(prevState, action);
-    expect(newState.transactionList).toHaveLength(1);
-    expect(newState.transactionList[0].name).toEqual("Fuel");
+    const action = deleteExpense("1");
+    const newState = newExpenseReducer(prevState, action);
+    expect(newState.expenseData).toHaveLength(1);
+    expect(newState.expenseData[0].name).toEqual("Fuel");
+    expect(newState.expenseData[0].id).toEqual("2");
   });
 
-  it("should handle removeAllTransactions", () => {
+  it("should handle deleteExpense for non-existing id", () => {
     const prevState = {
-      transactionList: [
+      expenseData: [
         { id: "1", name: "Groceries", amount: 50, category: "food" },
         { id: "2", name: "Fuel", amount: 30, category: "travel" },
       ],
     };
-    const action = removeAllTransactions();
-    const newState = transactionReducer(prevState, action);
-    expect(newState.transactionList).toHaveLength(0);
+    const action = deleteExpense("3"); // ID that doesn't exist
+    const newState = newExpenseReducer(prevState, action);
+    expect(newState.expenseData).toHaveLength(2); // Should remain the same
   });
 });

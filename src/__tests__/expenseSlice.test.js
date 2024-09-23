@@ -1,45 +1,53 @@
+// expenseSlice.test.js
 import expenseReducer, {
-  updateTotalExpense,
-  updateCategoricalExpense,
-  resetAllExpense,
-} from "../redux/expenseSlice";
+  addNewExpense,
+  deleteExpense,
+} from "../slices/newExpenseSlice";
 
 describe("expense slice reducers", () => {
   const initialState = {
-    totalExpense: 0,
-    categoricalExpense: {
-      food: 0,
-      travel: 0,
-      entertainment: 0,
-      others: 0,
-    },
+    expenseData: [],
   };
 
-  it("should handle updateTotalExpense", () => {
-    const action = updateTotalExpense({ amount: 100, operation: "add" });
+  it("should handle addNewExpense", () => {
+    const newExpense = {
+      id: "1",
+      name: "Groceries",
+      amount: "100",
+      category: "Food",
+    };
+    const action = addNewExpense(newExpense);
     const newState = expenseReducer(initialState, action);
-    expect(newState.totalExpense).toEqual(100);
+    
+    expect(newState.expenseData).toEqual([newExpense]);
   });
 
-  it("should handle updateCategoricalExpense", () => {
-    const action = updateCategoricalExpense({
-      amount: 50,
-      category: "food",
-      operation: "add",
-    });
-    const newState = expenseReducer(initialState, action);
-    expect(newState.categoricalExpense.food).toEqual(50);
+  it("should handle deleteExpense", () => {
+    const initialStateWithExpense = {
+      expenseData: [
+        { id: "1", name: "Groceries", amount: "100", category: "Food" },
+        { id: "2", name: "Taxi", amount: "50", category: "Travel" },
+      ],
+    };
+    
+    const action = deleteExpense("1");
+    const newState = expenseReducer(initialStateWithExpense, action);
+    
+    expect(newState.expenseData).toEqual([
+      { id: "2", name: "Taxi", amount: "50", category: "Travel" },
+    ]);
   });
 
-  it("should handle resetAllExpense", () => {
-    const action = resetAllExpense();
-    const newState = expenseReducer(initialState, action);
-    expect(newState.totalExpense).toEqual(0);
-    expect(newState.categoricalExpense).toEqual({
-      food: 0,
-      travel: 0,
-      entertainment: 0,
-      others: 0,
-    });
+  it("should not change state when deleting a non-existing expense", () => {
+    const initialStateWithExpense = {
+      expenseData: [
+        { id: "1", name: "Groceries", amount: "100", category: "Food" },
+      ],
+    };
+
+    const action = deleteExpense("2"); // Trying to delete a non-existing expense
+    const newState = expenseReducer(initialStateWithExpense, action);
+    
+    expect(newState.expenseData).toEqual(initialStateWithExpense.expenseData);
   });
 });

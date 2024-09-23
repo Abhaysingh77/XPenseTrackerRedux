@@ -1,0 +1,50 @@
+.container {
+    width: 95%;
+    /* padding: 2rem; */
+    margin: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(245, 236, 236);
+    padding: 0 3rem;
+}
+
+#new_update {
+    height: max-content;
+    padding: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+table,
+tr,
+td,
+th {
+    border: 1.5px solid black;
+    border-collapse: collapse;
+    padding: 0.5rem;
+}
+
+.category {
+    margin-top: 2px;
+    background-color: rgb(245, 236, 236);
+    padding: 1rem 3rem;
+}
+
+.statusBtn {
+    background-color: green;
+    border: none;
+    border-radius: 10%;
+    color: white;
+}
+
+.statusBtnWarn{
+    background-color: orange;
+    border: none;
+    border-radius: 10%;
+    color: white;
+}
+

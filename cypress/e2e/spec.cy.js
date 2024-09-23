@@ -1,4 +1,4 @@
-import store from "../../src/redux/Store";
+import store from "../../src/expenseStore";
 
 describe("LandingPageForm Initial State Tests", () => {
   beforeEach(() => {
@@ -54,9 +54,9 @@ describe("LandingPageForm Initial State Tests", () => {
         );
         expect(state.user.categoricalBudget.others).to.equal(
           newMonthlyBudget -
-            (newCategoricalBudget.food +
-              newCategoricalBudget.travel +
-              newCategoricalBudget.entertainment)
+          (newCategoricalBudget.food +
+            newCategoricalBudget.travel +
+            newCategoricalBudget.entertainment)
         );
       });
 
@@ -139,9 +139,9 @@ describe("ExpenseForm", () => {
         );
         expect(state.user.categoricalBudget.others).to.equal(
           newMonthlyBudget -
-            (newCategoricalBudget.food +
-              newCategoricalBudget.travel +
-              newCategoricalBudget.entertainment)
+          (newCategoricalBudget.food +
+            newCategoricalBudget.travel +
+            newCategoricalBudget.entertainment)
         );
       });
 
@@ -188,9 +188,9 @@ describe("ExpenseForm", () => {
         );
         expect(state.user.categoricalBudget.others).to.equal(
           newMonthlyBudget -
-            (newCategoricalBudget.food +
-              newCategoricalBudget.travel +
-              newCategoricalBudget.entertainment)
+          (newCategoricalBudget.food +
+            newCategoricalBudget.travel +
+            newCategoricalBudget.entertainment)
         );
       });
 
