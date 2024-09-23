@@ -40,7 +40,7 @@
       "numTestsKeptInMemory": 0,
       "platform": "linux",
       "pageLoadTimeout": 60000,
-      "port": 37247,
+      "port": 46381,
       "projectId": null,
       "redirectionLimit": 20,
       "reporter": "spec",
@@ -108,7 +108,7 @@
       "cypressInternalEnv": "production"
     },
     "cypressVersion": "13.14.2",
-    "endedTestsAt": "2024-09-23T21:59:43.360Z",
+    "endedTestsAt": "2024-09-23T22:32:24.667Z",
     "osName": "linux",
     "osVersion": "Ubuntu - ",
     "runs": [
@@ -116,45 +116,16 @@
         "error": null,
         "reporter": "spec",
         "reporterStats": {
-          "suites": 2,
-          "tests": 5,
-          "passes": 1,
+          "suites": 0,
+          "tests": 0,
+          "passes": 0,
           "pending": 0,
-          "failures": 4,
-          "start": "2024-09-23T21:59:26.617Z",
-          "end": "2024-09-23T21:59:43.369Z",
-          "duration": 16752
+          "failures": 0,
+          "start": "2024-09-23T22:32:24.670Z",
+          "end": "2024-09-23T22:32:24.670Z",
+          "duration": 0
         },
-        "screenshots": [
-          {
-            "height": 720,
-            "name": null,
-            "path": "/home/crio-user/workspace/singhabhay0315-ME_BUILDOUT_XPENSE_TRACKER/cypress/screenshots/spec.cy.js/LandingPageForm Initial State Tests -- should update the state and navigate on form submission (failed).png",
-            "takenAt": "2024-09-23T21:59:32.483Z",
-            "width": 1280
-          },
-          {
-            "height": 720,
-            "name": null,
-            "path": "/home/crio-user/workspace/singhabhay0315-ME_BUILDOUT_XPENSE_TRACKER/cypress/screenshots/spec.cy.js/LandingPageForm Initial State Tests -- should reset transactions and form data (failed).png",
-            "takenAt": "2024-09-23T21:59:38.419Z",
-            "width": 1280
-          },
-          {
-            "height": 720,
-            "name": null,
-            "path": "/home/crio-user/workspace/singhabhay0315-ME_BUILDOUT_XPENSE_TRACKER/cypress/screenshots/spec.cy.js/ExpenseForm -- should render the form (failed).png",
-            "takenAt": "2024-09-23T21:59:40.243Z",
-            "width": 1280
-          },
-          {
-            "height": 720,
-            "name": null,
-            "path": "/home/crio-user/workspace/singhabhay0315-ME_BUILDOUT_XPENSE_TRACKER/cypress/screenshots/spec.cy.js/ExpenseForm -- should handle form submission and update state (failed).png",
-            "takenAt": "2024-09-23T21:59:42.862Z",
-            "width": 1280
-          }
-        ],
+        "screenshots": [],
         "spec": {
           "absolute": "/home/crio-user/workspace/singhabhay0315-ME_BUILDOUT_XPENSE_TRACKER/cypress/e2e/spec.cy.js",
           "fileExtension": ".js",
@@ -163,99 +134,28 @@
           "relative": "cypress/e2e/spec.cy.js"
         },
         "stats": {
-          "duration": 16753,
-          "endedAt": "2024-09-23T21:59:43.360Z",
-          "failures": 4,
-          "passes": 1,
+          "duration": 1,
+          "endedAt": "2024-09-23T22:32:24.667Z",
+          "failures": 0,
+          "passes": 0,
           "pending": 0,
           "skipped": 0,
-          "startedAt": "2024-09-23T21:59:26.607Z",
-          "suites": 2,
-          "tests": 5
+          "startedAt": "2024-09-23T22:32:24.666Z",
+          "suites": 1,
+          "tests": 0
         },
-        "tests": [
-          {
-            "attempts": [
-              {
-                "state": "passed"
-              }
-            ],
-            "displayError": null,
-            "duration": 1365,
-            "state": "passed",
-            "title": [
-              "LandingPageForm Initial State Tests",
-              "should display initial state correctly"
-            ]
-          },
-          {
-            "attempts": [
-              {
-                "state": "failed"
-              }
-            ],
-            "displayError": "AssertionError: expected '' to equal 300\n    at Context.eval (webpack://my-app/./cypress/e2e/spec.cy.js:49:67)",
-            "duration": 1852,
-            "state": "failed",
-            "title": [
-              "LandingPageForm Initial State Tests",
-              "should update the state and navigate on form submission"
-            ]
-          },
-          {
-            "attempts": [
-              {
-                "state": "failed"
-              }
-            ],
-            "displayError": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `#new-update`, but never found it.\n    at Context.eval (webpack://my-app/./cypress/e2e/spec.cy.js:72:7)",
-            "duration": 5713,
-            "state": "failed",
-            "title": [
-              "LandingPageForm Initial State Tests",
-              "should reset transactions and form data"
-            ]
-          },
-          {
-            "attempts": [
-              {
-                "state": "failed"
-              }
-            ],
-            "displayError": "AssertionError: expected '' to equal 300\n    at Context.eval (webpack://my-app/./cypress/e2e/spec.cy.js:125:67)",
-            "duration": 1818,
-            "state": "failed",
-            "title": [
-              "ExpenseForm",
-              "should render the form"
-            ]
-          },
-          {
-            "attempts": [
-              {
-                "state": "failed"
-              }
-            ],
-            "displayError": "TypeError: Cannot read properties of undefined (reading 'totalExpense')\n    at Context.eval (webpack://my-app/./cypress/e2e/spec.cy.js:172:29)",
-            "duration": 2616,
-            "state": "failed",
-            "title": [
-              "ExpenseForm",
-              "should handle form submission and update state"
-            ]
-          }
-        ],
+        "tests": [],
         "video": null
       }
     ],
-    "startedTestsAt": "2024-09-23T21:59:26.607Z",
-    "totalDuration": 16753,
-    "totalFailed": 4,
-    "totalPassed": 1,
+    "startedTestsAt": "2024-09-23T22:32:24.666Z",
+    "totalDuration": 1,
+    "totalFailed": 0,
+    "totalPassed": 0,
     "totalPending": 0,
     "totalSkipped": 0,
-    "totalSuites": 2,
-    "totalTests": 5
+    "totalSuites": 1,
+    "totalTests": 0
   },
   "jest": {
     "numFailedTestSuites": 0,
@@ -285,49 +185,9 @@
       "unmatched": 0,
       "updated": 0
     },
-    "startTime": 1727128785462,
+    "startTime": 1727130746683,
     "success": true,
     "testResults": [
-      {
-        "assertionResults": [
-          {
-            "ancestorTitles": [
-              "expense slice reducers"
-            ],
-            "failureMessages": [],
-            "fullName": "expense slice reducers should handle addNewExpense",
-            "location": null,
-            "status": "passed",
-            "title": "should handle addNewExpense"
-          },
-          {
-            "ancestorTitles": [
-              "expense slice reducers"
-            ],
-            "failureMessages": [],
-            "fullName": "expense slice reducers should handle deleteExpense",
-            "location": null,
-            "status": "passed",
-            "title": "should handle deleteExpense"
-          },
-          {
-            "ancestorTitles": [
-              "expense slice reducers"
-            ],
-            "failureMessages": [],
-            "fullName": "expense slice reducers should not change state when deleting a non-existing expense",
-            "location": null,
-            "status": "passed",
-            "title": "should not change state when deleting a non-existing expense"
-          }
-        ],
-        "endTime": 1727128787052,
-        "message": "",
-        "name": "/home/crio-user/workspace/singhabhay0315-ME_BUILDOUT_XPENSE_TRACKER/src/__tests__/expenseSlice.test.js",
-        "startTime": 1727128786144,
-        "status": "passed",
-        "summary": ""
-      },
       {
         "assertionResults": [
           {
@@ -361,10 +221,50 @@
             "title": "should handle deleteExpense for non-existing id"
           }
         ],
-        "endTime": 1727128787418,
+        "endTime": 1727130748277,
         "message": "",
         "name": "/home/crio-user/workspace/singhabhay0315-ME_BUILDOUT_XPENSE_TRACKER/src/__tests__/transactionSlice.test.js",
-        "startTime": 1727128787085,
+        "startTime": 1727130747404,
+        "status": "passed",
+        "summary": ""
+      },
+      {
+        "assertionResults": [
+          {
+            "ancestorTitles": [
+              "expense slice reducers"
+            ],
+            "failureMessages": [],
+            "fullName": "expense slice reducers should handle addNewExpense",
+            "location": null,
+            "status": "passed",
+            "title": "should handle addNewExpense"
+          },
+          {
+            "ancestorTitles": [
+              "expense slice reducers"
+            ],
+            "failureMessages": [],
+            "fullName": "expense slice reducers should handle deleteExpense",
+            "location": null,
+            "status": "passed",
+            "title": "should handle deleteExpense"
+          },
+          {
+            "ancestorTitles": [
+              "expense slice reducers"
+            ],
+            "failureMessages": [],
+            "fullName": "expense slice reducers should not change state when deleting a non-existing expense",
+            "location": null,
+            "status": "passed",
+            "title": "should not change state when deleting a non-existing expense"
+          }
+        ],
+        "endTime": 1727130748628,
+        "message": "",
+        "name": "/home/crio-user/workspace/singhabhay0315-ME_BUILDOUT_XPENSE_TRACKER/src/__tests__/expenseSlice.test.js",
+        "startTime": 1727130748319,
         "status": "passed",
         "summary": ""
       },
@@ -381,10 +281,10 @@
             "title": "should handle addNewTracker"
           }
         ],
-        "endTime": 1727128787739,
+        "endTime": 1727130748943,
         "message": "",
         "name": "/home/crio-user/workspace/singhabhay0315-ME_BUILDOUT_XPENSE_TRACKER/src/__tests__/userSlice.test.js",
-        "startTime": 1727128787440,
+        "startTime": 1727130748650,
         "status": "passed",
         "summary": ""
       }
