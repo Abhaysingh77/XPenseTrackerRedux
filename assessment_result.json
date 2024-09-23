@@ -1,0 +1,14 @@
+{
+    "Test Case 1: LandingPageForm Initial State Tests - should display initial state correctly": "TEST_STATUS_SUCCESS",
+    "Test Case 2: LandingPageForm Initial State Tests - should update the state and navigate on form submission": "TEST_STATUS_FAILURE",
+    "Test Case 3: LandingPageForm Initial State Tests - should reset transactions and form data": "TEST_STATUS_FAILURE",
+    "Test Case 4: ExpenseForm - should render the form": "TEST_STATUS_FAILURE",
+    "Test Case 5: ExpenseForm - should handle form submission and update state": "TEST_STATUS_FAILURE",
+    "Test Case 6: expense slice reducers should handle addNewExpense": "TEST_STATUS_SUCCESS",
+    "Test Case 7: expense slice reducers should handle deleteExpense": "TEST_STATUS_SUCCESS",
+    "Test Case 8: expense slice reducers should not change state when deleting a non-existing expense": "TEST_STATUS_SUCCESS",
+    "Test Case 9: newExpense slice reducers should handle addNewExpense": "TEST_STATUS_SUCCESS",
+    "Test Case 10: newExpense slice reducers should handle deleteExpense": "TEST_STATUS_SUCCESS",
+    "Test Case 11: newExpense slice reducers should handle deleteExpense for non-existing id": "TEST_STATUS_SUCCESS",
+    "Test Case 12: newTracker slice reducers should handle addNewTracker": "TEST_STATUS_SUCCESS"
+}

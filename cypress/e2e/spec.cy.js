@@ -2,78 +2,70 @@ import store from "../../src/expenseStore";
 
 describe("LandingPageForm Initial State Tests", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/");
+    cy.visit("http://localhost:8082/");
   });
 
   it("should display initial state correctly", () => {
     cy.window()
       .then((win) => {
-        console.log(store); // Log the store to the console for debugging
-        expect(store).to.exist; // Ensure the store exists
-        return store.getState();
+        console.log(win.store); // Log the store to the console for debugging
+        expect(win.store).to.exist; // Ensure the store exists
+        return win.store.getState();
       })
       .then((state) => {
-        expect(state.user.userName).to.equal("");
-        expect(state.user.monthlyBudget).to.equal("");
-        expect(state.user.categoricalBudget.food).to.equal("");
-        expect(state.user.categoricalBudget.travel).to.equal("");
-        expect(state.user.categoricalBudget.entertainment).to.equal("");
+        expect(state.newTrackerSlice.trackerData.name).to.equal("");
+        expect(state.newTrackerSlice.trackerData.monthlyBudget).to.equal("");
+        expect(state.newTrackerSlice.trackerData.category.Food).to.equal("");
+        expect(state.newTrackerSlice.trackerData.category.Travel).to.equal("");
+        expect(state.newTrackerSlice.trackerData.category.Entertainment).to.equal("");
       });
   });
 
   it("should update the state and navigate on form submission", () => {
     const newUserName = "Test User";
     const newMonthlyBudget = 1000;
-    const newCategoricalBudget = { food: 300, travel: 200, entertainment: 100 };
+    const newCategoricalBudget = { Food: 300, Travel: 200, Entertainment: 100 };
 
     cy.get("input#name").type(newUserName);
     cy.get("input#budget").type(newMonthlyBudget);
 
-    cy.get("input#food").type(newCategoricalBudget.food);
-    cy.get("input#travel").type(newCategoricalBudget.travel);
-    cy.get("input#entertainment").type(newCategoricalBudget.entertainment);
+    cy.get("input#food").type(newCategoricalBudget.Food);
+    cy.get("input#travel").type(newCategoricalBudget.Travel);
+    cy.get("input#entertainment").type(newCategoricalBudget.Entertainment);
 
     cy.get("form").submit();
 
+    // Wait for navigation to complete and check if we're on the tracker page
+    cy.url().should("include", "/tracker");
+
+    // Log the state after submission for debugging
     cy.window()
-      .then((win) => {
-        console.log(win.store);
-        return win.store.getState();
-      })
+      .its("store")
+      .invoke("getState")
       .then((state) => {
-        expect(state.user.userName).to.equal(newUserName);
-        expect(state.user.monthlyBudget).to.equal(newMonthlyBudget);
-        expect(state.user.categoricalBudget.food).to.equal(
-          newCategoricalBudget.food
-        );
-        expect(state.user.categoricalBudget.travel).to.equal(
-          newCategoricalBudget.travel
-        );
-        expect(state.user.categoricalBudget.entertainment).to.equal(
-          newCategoricalBudget.entertainment
-        );
-        expect(state.user.categoricalBudget.others).to.equal(
-          newMonthlyBudget -
-          (newCategoricalBudget.food +
-            newCategoricalBudget.travel +
-            newCategoricalBudget.entertainment)
+        console.log(state); // Log the state for inspection
+        expect(state.newTrackerSlice.trackerData.name).to.equal(newUserName);
+        expect(state.newTrackerSlice.trackerData.monthlyBudget).to.equal(newMonthlyBudget);
+        expect(state.newTrackerSlice.trackerData.category.Food).to.equal(newCategoricalBudget.Food);
+        expect(state.newTrackerSlice.trackerData.category.Travel).to.equal(newCategoricalBudget.Travel);
+        expect(state.newTrackerSlice.trackerData.category.Entertainment).to.equal(newCategoricalBudget.Entertainment);
+        expect(state.newTrackerSlice.trackerData.category.Other).to.equal(
+          newMonthlyBudget - (newCategoricalBudget.Food + newCategoricalBudget.Travel + newCategoricalBudget.Entertainment)
         );
       });
-
-    cy.url().should("include", "/tracker");
   });
 
   it("should reset transactions and form data", () => {
     const newUserName = "Test User";
     const newMonthlyBudget = 1000;
-    const newCategoricalBudget = { food: 300, travel: 200, entertainment: 100 };
+    const newCategoricalBudget = { Food: 300, Travel: 200, Entertainment: 100 };
 
     // Fill in the form
     cy.get("input#name").type(newUserName);
     cy.get("input#budget").type(newMonthlyBudget);
-    cy.get("input#food").type(newCategoricalBudget.food);
-    cy.get("input#travel").type(newCategoricalBudget.travel);
-    cy.get("input#entertainment").type(newCategoricalBudget.entertainment);
+    cy.get("input#food").type(newCategoricalBudget.Food);
+    cy.get("input#travel").type(newCategoricalBudget.Travel);
+    cy.get("input#entertainment").type(newCategoricalBudget.Entertainment);
     cy.get("form").submit();
 
     // Trigger reset
@@ -86,11 +78,11 @@ describe("LandingPageForm Initial State Tests", () => {
       .its("store")
       .invoke("getState")
       .should((state) => {
-        expect(state.user.userName).to.equal("");
-        expect(state.user.monthlyBudget).to.equal("");
-        expect(state.user.categoricalBudget.food).to.equal("");
-        expect(state.user.categoricalBudget.travel).to.equal("");
-        expect(state.user.categoricalBudget.entertainment).to.equal("");
+        expect(state.newTrackerSlice.trackerData.name).to.equal("");
+        expect(state.newTrackerSlice.trackerData.monthlyBudget).to.equal("");
+        expect(state.newTrackerSlice.trackerData.category.Food).to.equal("");
+        expect(state.newTrackerSlice.trackerData.category.Travel).to.equal("");
+        expect(state.newTrackerSlice.trackerData.category.Entertainment).to.equal("");
       });
 
     cy.get("input#name").should("have.value", "");
@@ -103,51 +95,43 @@ describe("LandingPageForm Initial State Tests", () => {
 
 describe("ExpenseForm", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/"); // Adjust the path to where your component is rendered
+    cy.visit("http://localhost:8082/"); // Ensure this matches the landing page
   });
 
   it("should render the form", () => {
     const newUserName = "Test User";
     const newMonthlyBudget = 1000;
-    const newCategoricalBudget = { food: 300, travel: 200, entertainment: 100 };
+    const newCategoricalBudget = { Food: 300, Travel: 200, Entertainment: 100 };
 
     cy.get("input#name").type(newUserName);
     cy.get("input#budget").type(newMonthlyBudget);
 
-    cy.get("input#food").type(newCategoricalBudget.food);
-    cy.get("input#travel").type(newCategoricalBudget.travel);
-    cy.get("input#entertainment").type(newCategoricalBudget.entertainment);
+    cy.get("input#food").type(newCategoricalBudget.Food);
+    cy.get("input#travel").type(newCategoricalBudget.Travel);
+    cy.get("input#entertainment").type(newCategoricalBudget.Entertainment);
 
     cy.get("form").submit();
 
+    // Wait for navigation to the expense form
+    cy.url().should("include", "/tracker");
+
     cy.window()
       .then((win) => {
-        console.log(win.store);
         return win.store.getState();
       })
       .then((state) => {
-        expect(state.user.userName).to.equal(newUserName);
-        expect(state.user.monthlyBudget).to.equal(newMonthlyBudget);
-        expect(state.user.categoricalBudget.food).to.equal(
-          newCategoricalBudget.food
-        );
-        expect(state.user.categoricalBudget.travel).to.equal(
-          newCategoricalBudget.travel
-        );
-        expect(state.user.categoricalBudget.entertainment).to.equal(
-          newCategoricalBudget.entertainment
-        );
-        expect(state.user.categoricalBudget.others).to.equal(
-          newMonthlyBudget -
-          (newCategoricalBudget.food +
-            newCategoricalBudget.travel +
-            newCategoricalBudget.entertainment)
+        expect(state.newTrackerSlice.trackerData.name).to.equal(newUserName);
+        expect(state.newTrackerSlice.trackerData.monthlyBudget).to.equal(newMonthlyBudget);
+        expect(state.newTrackerSlice.trackerData.category.Food).to.equal(newCategoricalBudget.Food);
+        expect(state.newTrackerSlice.trackerData.category.Travel).to.equal(newCategoricalBudget.Travel);
+        expect(state.newTrackerSlice.trackerData.category.Entertainment).to.equal(newCategoricalBudget.Entertainment);
+        expect(state.newTrackerSlice.trackerData.category.Other).to.equal(
+          newMonthlyBudget - (newCategoricalBudget.Food + newCategoricalBudget.Travel + newCategoricalBudget.Entertainment)
         );
       });
 
-    cy.url().should("include", "/tracker");
-
-    cy.get(".expense-form1").should("exist");
+    // Check for form existence
+    cy.get(".expense_form").should("exist"); 
     cy.get("div.title").contains("New Expense Form");
     cy.get("label[for='expense-name']").contains("Expense Name:");
     cy.get("label[for='category-select']").contains("Select category:");
@@ -158,47 +142,22 @@ describe("ExpenseForm", () => {
   it("should handle form submission and update state", () => {
     const newUserName = "Test User";
     const newMonthlyBudget = 1000;
-    const newCategoricalBudget = { food: 300, travel: 200, entertainment: 100 };
+    const newCategoricalBudget = { Food: 300, Travel: 200, Entertainment: 100 };
 
     cy.get("input#name").type(newUserName);
     cy.get("input#budget").type(newMonthlyBudget);
 
-    cy.get("input#food").type(newCategoricalBudget.food);
-    cy.get("input#travel").type(newCategoricalBudget.travel);
-    cy.get("input#entertainment").type(newCategoricalBudget.entertainment);
+    cy.get("input#food").type(newCategoricalBudget.Food);
+    cy.get("input#travel").type(newCategoricalBudget.Travel);
+    cy.get("input#entertainment").type(newCategoricalBudget.Entertainment);
 
     cy.get("form").submit();
-
-    cy.window()
-      .then((win) => {
-        console.log(win.store);
-        return win.store.getState();
-      })
-      .then((state) => {
-        expect(state.user.userName).to.equal(newUserName);
-        expect(state.user.monthlyBudget).to.equal(newMonthlyBudget);
-        expect(state.user.categoricalBudget.food).to.equal(
-          newCategoricalBudget.food
-        );
-        expect(state.user.categoricalBudget.travel).to.equal(
-          newCategoricalBudget.travel
-        );
-        expect(state.user.categoricalBudget.entertainment).to.equal(
-          newCategoricalBudget.entertainment
-        );
-        expect(state.user.categoricalBudget.others).to.equal(
-          newMonthlyBudget -
-          (newCategoricalBudget.food +
-            newCategoricalBudget.travel +
-            newCategoricalBudget.entertainment)
-        );
-      });
 
     cy.url().should("include", "/tracker");
 
     const newExpenseName = "Groceries";
     const newExpenseAmount = 100;
-    const newExpenseCategory = "food";
+    const newExpenseCategory = "Food"; // Ensure category matches the case used in the input
 
     cy.get("input#expense-name").type(newExpenseName);
     cy.get("select#category-select").select(newExpenseCategory);
@@ -210,11 +169,8 @@ describe("ExpenseForm", () => {
       .its("store")
       .invoke("getState")
       .then((state) => {
-        console.log(state);
         expect(state.expense.totalExpense).to.equal(newExpenseAmount);
-        expect(state.expense.categoricalExpense.food).to.equal(
-          newExpenseAmount
-        );
+        expect(state.expense.categoricalExpense.Food).to.equal(newExpenseAmount);
 
         expect(state.transactions.transactionList.length).to.equal(1);
         expect(state.transactions.transactionList[0]).to.deep.include({
@@ -224,6 +180,7 @@ describe("ExpenseForm", () => {
         });
       });
 
+    // Check that form inputs are cleared after submission
     cy.get("input#expense-name").should("have.value", "");
     cy.get("select#category-select").should("have.value", "");
     cy.get("input#expense-amount").should("have.value", "");
