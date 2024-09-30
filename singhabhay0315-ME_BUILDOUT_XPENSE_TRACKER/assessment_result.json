@@ -1,0 +1,9 @@
+{
+    "Test Case 1: newExpense slice reducers should handle addNewExpense": "TEST_STATUS_SUCCESS",
+    "Test Case 2: newExpense slice reducers should handle deleteExpense": "TEST_STATUS_SUCCESS",
+    "Test Case 3: newExpense slice reducers should handle deleteExpense for non-existing id": "TEST_STATUS_SUCCESS",
+    "Test Case 4: expense slice reducers should handle addNewExpense": "TEST_STATUS_SUCCESS",
+    "Test Case 5: expense slice reducers should handle deleteExpense": "TEST_STATUS_SUCCESS",
+    "Test Case 6: expense slice reducers should not change state when deleting a non-existing expense": "TEST_STATUS_SUCCESS",
+    "Test Case 7: newTracker slice reducers should handle addNewTracker": "TEST_STATUS_SUCCESS"
+}
