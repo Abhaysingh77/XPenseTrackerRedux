@@ -1,0 +1,55 @@
+.container {
+    width: 80%;
+    height: 40vmax;
+    margin: auto;
+    background-color: rgb(245, 236, 236);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* text-align: center; */
+}
+
+.expense_form {
+    width: 60%;
+    height: max-content;
+    border: 2px solid black;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    /* align-items:center; */
+    justify-content: space-between;
+}
+
+/* .expense_form {} */
+table,
+tr,
+td,
+th {
+    border: 1.5px solid black;
+    border-collapse: collapse;
+    padding: 0.5rem;
+}
+
+button {
+    height: max-content;
+    width: max-content;
+    margin: auto;
+    cursor: pointer;
+}
+
+.form_group {
+    margin: 0.5rem;
+    
+}
+.updateBtnGrp {
+    text-align: center;
+}
+.updateBtnGrp button {
+    margin: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+.updateBtnGrp button:nth-child(3){
+    padding: 0.4rem;
+}

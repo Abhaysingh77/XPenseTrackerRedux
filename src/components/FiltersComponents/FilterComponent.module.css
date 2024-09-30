@@ -1,0 +1,40 @@
+.filterPills {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: max-content;
+}
+
+.filterPills > h2 {
+    margin-right: 2rem;
+}
+
+.filterPills button {
+    height: max-content;
+    width: max-content;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.filterPills button:hover {
+    background-color: rgba(128, 128, 128, 0.63);
+}
+
+.selected {
+    background-color: rgba(128, 128, 128, 0.63);
+}
+
+.filtersWrapper {
+    margin-top: 2px;
+    background-color: rgb(245, 236, 236);
+    padding: 1rem 3rem;
+}
+
+table, tr, td, th {
+    border: 1.5px solid black;
+    border-collapse: collapse;
+    padding: 0.5rem;
+}

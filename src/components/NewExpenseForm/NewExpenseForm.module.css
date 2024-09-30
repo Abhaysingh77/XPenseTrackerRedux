@@ -1,0 +1,21 @@
+
+.expense_form {
+    margin-top: 2px;
+    background-color: rgb(245, 236, 236);
+    padding: 1rem 3rem;
+
+}
+
+.formWrapper {
+    background-color: rgba(128, 128, 128, 0.342);
+    padding: 1rem;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.expense_form1 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
