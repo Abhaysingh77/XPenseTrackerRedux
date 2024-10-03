@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom"; // Used for programmatic navigat
 import Style from "./LandingPage.module.css"; // Custom CSS module for styling
 import { useSnackbar } from "notistack"; // Snackbar notifications for success and warning messages
 import { useSelector, useDispatch } from "react-redux"; // Redux hooks for state management
-import { addNewTracker } from "../../slices/newTrackerSlice"; // Redux action to add new tracker data
+import {
+  addNewTracker,
+  addOtherCategoryData,
+} from "../../slices/newTrackerSlice"; // Redux action to add new tracker data
 
+import { resetExpense } from "../../slices/newExpenseSlice";
 export default function ExpenseTrackerForm() {
   // Fetch existing tracker data from Redux store
   const newTracker = useSelector((state) => state.newTrackerSlice.trackerData);
@@ -30,6 +34,7 @@ export default function ExpenseTrackerForm() {
     if (formData.monthlyBudget >= total && formData.monthlyBudget > 0) {
       // Dispatch form data to the Redux store
       dispatch(addNewTracker(formData));
+      dispatch(addOtherCategoryData(formData.monthlyBudget - total));
 
       // Show success message using snackbar
       enqueueSnackbar("Success", {
@@ -90,6 +95,7 @@ export default function ExpenseTrackerForm() {
     );
     if (flag) {
       // Reset Redux state and local form state
+      dispatch(resetExpense());
       dispatch(
         addNewTracker({
           name: "",
@@ -98,6 +104,7 @@ export default function ExpenseTrackerForm() {
             Food: "",
             Travel: "",
             Entertainment: "",
+            Other: "",
           },
         })
       );
@@ -108,6 +115,7 @@ export default function ExpenseTrackerForm() {
           Food: "",
           Travel: "",
           Entertainment: "",
+          Other: "",
         },
       });
     }
@@ -158,7 +166,9 @@ export default function ExpenseTrackerForm() {
 
         {/* Inputs for category budgets */}
         <div className={Style.form_group}>
-          <p className="category-label">Fill your monthly categorical budget:</p>
+          <p className="category-label">
+            Fill your monthly categorical budget:
+          </p>
           <table>
             <thead>
               <tr>
@@ -204,7 +214,9 @@ export default function ExpenseTrackerForm() {
         {/* Conditional buttons based on whether tracker data exists */}
         {newTracker.name.length ? (
           <div className={Style.updateBtnGrp}>
-            <button id="new-update" type="submit">Update tracker</button>
+            <button id="new-update" type="submit">
+              Update tracker
+            </button>
             <button id="clear" type="button" onClick={handleRestart}>
               Start new tracker
             </button>

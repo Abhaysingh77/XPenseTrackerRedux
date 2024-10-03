@@ -28,6 +28,7 @@ export default function TransactionPage() {
   const travelExpense = getTotalByCategory("Travel") ?? 0;
   const entertainmentExpense = getTotalByCategory("Entertainment") ?? 0;
   const otherExpense = getTotalByCategory("Other") ?? 0;
+  console.log(otherExpense);
 
   const handleClick = () => {
     navigate("/");
@@ -128,9 +129,17 @@ export default function TransactionPage() {
                   <button className={Style.statusBtnWarn}>exceed</button>
                 )}
               </td>
-              <td>{parseInt(trackerData.monthlyBudget) - (parseInt(trackerData.category.Entertainment)+parseInt(trackerData.category.Travel)+parseInt(trackerData.category.Food))}</td>
+              <td>
+                {trackerData.category.Other}
+              </td>
               <td>{otherExpense}</td>
-              <td>{parseInt(trackerData.monthlyBudget) - (parseInt(trackerData.category.Entertainment)+parseInt(trackerData.category.Travel)+parseInt(trackerData.category.Food)) - otherExpense}</td>
+              <td>
+                {parseInt(trackerData.monthlyBudget) -
+                  (parseInt(trackerData.category.Entertainment) +
+                    parseInt(trackerData.category.Travel) +
+                    parseInt(trackerData.category.Food)) -
+                  otherExpense}
+              </td>
             </tr>
           </tbody>
         </table>

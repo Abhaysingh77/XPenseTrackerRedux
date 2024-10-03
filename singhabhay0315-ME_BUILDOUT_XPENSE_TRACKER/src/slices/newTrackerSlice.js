@@ -5,21 +5,24 @@ const newTrackerSlice = createSlice({
   initialState: {
     trackerData: {
       name: "",
-      monthlyBudget:"",
+      monthlyBudget: "",
       category: {
         Food: "",
         Travel: "",
         Entertainment: "",
-        Other:""
+        Other: ""
       },
     },
   },
   reducers: {
     addNewTracker: (state, action) => {
-        state.trackerData = action.payload;
+      state.trackerData = action.payload;
     },
+    addOtherCategoryData: (state, action) => {
+      state.trackerData.category.Other = action.payload
+    }
   },
 });
 
-export const {addNewTracker} = newTrackerSlice.actions;
+export const { addNewTracker, addOtherCategoryData } = newTrackerSlice.actions;
 export default newTrackerSlice.reducer;
